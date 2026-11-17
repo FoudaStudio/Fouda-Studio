@@ -1,0 +1,777 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>فوده ستوديو — استوديو فيديو وصوت وصور في برنامج واحد</title>
+<meta name="description" content="فوده ستوديو: 64 أداة احترافية للمونتاج والمؤثرات والدبلجة والترجمة الآلية واستوديو الموسيقى والصور — كلها في برنامج واحد على جهازك.">
+<meta property="og:title" content="فوده ستوديو — استوديو كامل في برنامج واحد">
+<meta property="og:description" content="مونتاج · مؤثرات · دبلجة وترجمة آلية · استوديو موسيقى · استوديو صور — 64 أداة على جهازك.">
+<meta property="og:image" content="img/app-main.webp">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#07040d">
+<link rel="icon" href="img/logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --a1:#ffb020; --a2:#ff4d6d; --a3:#a855f7;
+  --bg:#07040d; --bg2:#0b0716; --panel:#130d22; --panel2:#181129; --panel3:#1f1735;
+  --line:rgba(255,255,255,.075); --line2:rgba(255,255,255,.14);
+  --txt:#f3edff; --txt2:#c9bfe0; --dim:#958ab3;
+  --r:18px; --font:"Cairo","Tajawal","Segoe UI",Tahoma,Arial,sans-serif;
+  --max:1180px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  background:var(--bg); color:var(--txt); font-family:var(--font);
+  line-height:1.75; -webkit-font-smoothing:antialiased; overflow-x:hidden;
+}
+body::before{
+  content:""; position:fixed; inset:0; z-index:-2; pointer-events:none;
+  background:
+    radial-gradient(900px 520px at 78% -8%, rgba(255,176,32,.13), transparent 62%),
+    radial-gradient(760px 480px at 12% 4%, rgba(168,85,247,.16), transparent 62%),
+    radial-gradient(700px 520px at 50% 108%, rgba(255,77,109,.10), transparent 65%),
+    var(--bg);
+}
+body::after{
+  content:""; position:fixed; inset:0; z-index:-1; pointer-events:none; opacity:.35;
+  background-image:linear-gradient(rgba(255,255,255,.028) 1px,transparent 1px),
+                   linear-gradient(90deg,rgba(255,255,255,.028) 1px,transparent 1px);
+  background-size:64px 64px;
+  mask-image:radial-gradient(circle at 50% 20%,#000 0%,transparent 78%);
+  -webkit-mask-image:radial-gradient(circle at 50% 20%,#000 0%,transparent 78%);
+}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:var(--max);margin:0 auto;padding:0 22px}
+.grad{background:linear-gradient(100deg,var(--a1),var(--a2) 48%,var(--a3));-webkit-background-clip:text;background-clip:text;color:transparent}
+
+/* ---------------------------- ناف ---------------------------- */
+nav{
+  position:sticky; top:0; z-index:60; transition:.28s;
+  border-bottom:1px solid transparent;
+}
+nav.on{background:rgba(9,5,16,.82); backdrop-filter:blur(16px); border-bottom-color:var(--line)}
+nav .in{max-width:var(--max);margin:0 auto;padding:14px 22px;display:flex;align-items:center;gap:14px}
+.brand{display:flex;align-items:center;gap:11px;font-weight:900;font-size:19px;letter-spacing:-.2px}
+.brand img{width:38px;height:38px;border-radius:11px;box-shadow:0 6px 20px rgba(255,77,109,.35)}
+nav .links{display:flex;gap:6px;margin-inline-start:auto}
+nav .links a{padding:8px 14px;border-radius:10px;font-size:14px;font-weight:600;color:var(--txt2);transition:.2s}
+nav .links a:hover{color:#fff;background:rgba(255,255,255,.06)}
+.nav-cta{
+  padding:9px 20px;border-radius:11px;font-weight:700;font-size:14px;color:#1a0a00;
+  background:linear-gradient(100deg,var(--a1),#ffcf6b);box-shadow:0 8px 24px rgba(255,176,32,.3);
+  transition:.2s; white-space:nowrap;
+}
+.nav-cta:hover{transform:translateY(-2px);box-shadow:0 12px 30px rgba(255,176,32,.42)}
+@media(max-width:860px){nav .links{display:none} .lang-btn{margin-inline-start:auto}}
+/* -------- زرار اللغة -------- */
+.lang-btn{
+  display:inline-flex;align-items:center;gap:7px;padding:8px 13px;border-radius:10px;
+  font-family:inherit;font-size:13.5px;font-weight:800;color:var(--txt2);line-height:1;
+  background:rgba(255,255,255,.045);border:1px solid var(--line2);cursor:pointer;
+  transition:.2s;white-space:nowrap;
+}
+.lang-btn:hover{color:#fff;background:rgba(255,255,255,.1);border-color:rgba(255,176,32,.5);transform:translateY(-1px)}
+.lang-btn svg{width:16px;height:16px;flex:none;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.lang-btn span{min-width:17px;text-align:center}
+
+/* ---------------------------- هيرو ---------------------------- */
+header{padding:64px 0 40px;text-align:center;position:relative}
+.badge{
+  display:inline-flex;align-items:center;gap:9px;padding:7px 16px;border-radius:999px;
+  border:1px solid var(--line2);background:rgba(255,255,255,.04);
+  font-size:13px;font-weight:600;color:var(--txt2);margin-bottom:26px;
+}
+.badge i{width:7px;height:7px;border-radius:50%;background:var(--ok,#37d67a);box-shadow:0 0 10px #37d67a;animation:pulse 2.2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.35}}
+h1{font-size:clamp(30px,5.2vw,58px);line-height:1.22;font-weight:900;letter-spacing:-1px;margin-bottom:20px}
+.lead{font-size:clamp(15px,1.9vw,19px);color:var(--txt2);max-width:760px;margin:0 auto 34px;line-height:1.9}
+.cta-row{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-bottom:16px}
+.btn{
+  display:inline-flex;align-items:center;gap:10px;padding:15px 30px;border-radius:14px;
+  font-family:var(--font);font-weight:800;font-size:16px;border:0;cursor:pointer;transition:.22s;
+}
+.btn svg{width:20px;height:20px;flex:none}
+.btn-main{color:#1a0a00;background:linear-gradient(100deg,var(--a1),#ffd27d);box-shadow:0 14px 38px rgba(255,176,32,.32)}
+.btn-main:hover{transform:translateY(-3px);box-shadow:0 20px 46px rgba(255,176,32,.45)}
+.btn-ghost{color:var(--txt);background:rgba(255,255,255,.055);border:1px solid var(--line2)}
+.btn-ghost:hover{background:rgba(255,255,255,.1);transform:translateY(-3px)}
+.sub-note{font-size:13px;color:var(--dim);margin-bottom:52px}
+
+/* صورة الهيرو */
+.hero-shot{
+  position:relative;border-radius:20px;overflow:hidden;
+  border:1px solid rgba(255,255,255,.12);
+  box-shadow:0 40px 100px rgba(0,0,0,.75), 0 0 0 1px rgba(168,85,247,.14);
+  transform:perspective(1600px) rotateX(5deg);transform-origin:50% 100%;
+  transition:transform .8s cubic-bezier(.16,1,.3,1);
+}
+.hero-shot:hover{transform:perspective(1600px) rotateX(0deg)}
+.hero-shot img{display:block;width:100%;height:auto}
+.hero-shot::after{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(to top,rgba(7,4,13,.55),transparent 38%);
+}
+.glow{
+  position:absolute;left:50%;top:52%;transform:translate(-50%,-50%);
+  width:72%;height:64%;border-radius:50%;filter:blur(90px);z-index:-1;
+  background:linear-gradient(100deg,rgba(255,176,32,.28),rgba(255,77,109,.22),rgba(168,85,247,.3));
+  animation:breathe 7s ease-in-out infinite;
+}
+@keyframes breathe{0%,100%{opacity:.55;transform:translate(-50%,-50%) scale(1)}50%{opacity:.9;transform:translate(-50%,-50%) scale(1.08)}}
+
+/* ---------------------------- إحصائيات ---------------------------- */
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin:56px 0 0}
+.stat{
+  padding:22px 16px;border-radius:var(--r);border:1px solid var(--line);
+  background:linear-gradient(160deg,rgba(255,255,255,.045),rgba(255,255,255,.012));
+  text-align:center;transition:.25s;
+}
+.stat:hover{border-color:var(--line2);transform:translateY(-3px)}
+.stat b{display:block;font-size:30px;font-weight:900;line-height:1.2}
+.stat span{font-size:13px;color:var(--dim);font-weight:600}
+@media(max-width:760px){.stats{grid-template-columns:repeat(2,1fr)}}
+
+/* ---------------------------- عناوين الأقسام ---------------------------- */
+section{padding:86px 0}
+.head{text-align:center;margin-bottom:52px}
+.kicker{
+  font-size:12.5px;font-weight:800;letter-spacing:2px;text-transform:uppercase;
+  color:var(--a1);margin-bottom:12px;
+}
+h2{font-size:clamp(25px,3.6vw,40px);font-weight:900;letter-spacing:-.6px;line-height:1.3;margin-bottom:14px}
+.head p{color:var(--txt2);max-width:640px;margin:0 auto;font-size:15.5px}
+
+/* ---------------------------- المميزات ---------------------------- */
+.feats{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+@media(max-width:940px){.feats{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:600px){.feats{grid-template-columns:1fr}}
+.feat{
+  position:relative;padding:26px 24px;border-radius:var(--r);overflow:hidden;
+  border:1px solid var(--line);background:linear-gradient(165deg,var(--panel),var(--bg2));
+  transition:transform .3s cubic-bezier(.16,1,.3,1),border-color .3s,box-shadow .3s;
+}
+.feat::before{
+  content:"";position:absolute;inset:0;opacity:0;transition:.35s;pointer-events:none;
+  background:radial-gradient(420px 200px at var(--mx,50%) var(--my,0%),rgba(255,176,32,.13),transparent 70%);
+}
+.feat:hover{transform:translateY(-6px);border-color:rgba(255,176,32,.4);box-shadow:0 22px 50px rgba(0,0,0,.5)}
+.feat:hover::before{opacity:1}
+.ic{
+  width:46px;height:46px;border-radius:13px;display:grid;place-items:center;margin-bottom:16px;
+  background:linear-gradient(140deg,rgba(255,176,32,.18),rgba(168,85,247,.18));
+  border:1px solid rgba(255,176,32,.28);
+}
+.ic svg{width:23px;height:23px;stroke:var(--a1);fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.feat h3{font-size:17px;font-weight:800;margin-bottom:8px}
+.feat p{font-size:14px;color:var(--dim);line-height:1.8}
+
+/* ---------------------------- المعرض ---------------------------- */
+.gal{display:grid;grid-template-columns:repeat(2,1fr);gap:20px}
+@media(max-width:820px){.gal{grid-template-columns:1fr}}
+.shot{
+  position:relative;border-radius:16px;overflow:hidden;cursor:pointer;
+  border:1px solid var(--line);background:var(--panel);
+  transform-style:preserve-3d;
+  transition:transform .45s cubic-bezier(.16,1,.3,1),box-shadow .45s,border-color .45s;
+  will-change:transform;
+}
+.shot img{display:block;width:100%;height:auto;transition:transform .7s cubic-bezier(.16,1,.3,1),filter .5s;filter:saturate(1.04) brightness(1.05)}
+.shot:hover{border-color:rgba(255,176,32,.45);box-shadow:0 30px 70px rgba(0,0,0,.6),0 0 0 1px rgba(255,176,32,.22)}
+.shot:hover img{transform:scale(1.07);filter:saturate(1.12) brightness(1.04)}
+.shot .cap{
+  position:absolute;inset-inline:0;bottom:0;padding:46px 22px 18px;
+  background:linear-gradient(to top,rgba(7,4,13,.96),rgba(7,4,13,.72) 45%,transparent);
+  transform:translateY(18px);opacity:0;transition:.42s cubic-bezier(.16,1,.3,1);
+}
+.shot:hover .cap{transform:translateY(0);opacity:1}
+.shot .cap b{display:block;font-size:16px;font-weight:800;margin-bottom:3px}
+.shot .cap span{font-size:13px;color:var(--dim)}
+.shot .zoom{
+  position:absolute;top:14px;inset-inline-start:14px;width:34px;height:34px;border-radius:10px;
+  display:grid;place-items:center;background:rgba(7,4,13,.72);border:1px solid var(--line2);
+  opacity:0;transform:scale(.8);transition:.3s;
+}
+.shot:hover .zoom{opacity:1;transform:scale(1)}
+.shot .zoom svg{width:16px;height:16px;stroke:#fff;fill:none;stroke-width:2}
+.shot.wide{grid-column:1/-1}
+
+/* ---------------------------- الخطوات ---------------------------- */
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;counter-reset:s}
+@media(max-width:820px){.steps{grid-template-columns:1fr}}
+.step{
+  position:relative;padding:30px 24px 26px;border-radius:var(--r);
+  border:1px solid var(--line);background:linear-gradient(165deg,var(--panel2),var(--bg2));
+  transition:.3s;
+}
+.step:hover{border-color:var(--line2);transform:translateY(-4px)}
+.step::before{
+  counter-increment:s;content:counter(s);
+  position:absolute;top:-18px;inset-inline-start:24px;
+  width:38px;height:38px;border-radius:12px;display:grid;place-items:center;
+  font-weight:900;font-size:17px;color:#1a0a00;
+  background:linear-gradient(140deg,var(--a1),#ffd27d);
+  box-shadow:0 8px 22px rgba(255,176,32,.35);
+}
+.step h3{font-size:16px;font-weight:800;margin:14px 0 8px}
+.step p{font-size:14px;color:var(--dim)}
+
+/* ---------------------------- صندوق المتطلبات ---------------------------- */
+.req{
+  display:grid;grid-template-columns:1.15fr .85fr;gap:34px;align-items:center;
+  padding:36px;border-radius:22px;border:1px solid var(--line);
+  background:linear-gradient(150deg,var(--panel2),var(--bg2) 70%);
+}
+@media(max-width:860px){.req{grid-template-columns:1fr;padding:26px}}
+.req h2{font-size:26px;margin-bottom:16px}
+.req ul{list-style:none;display:grid;gap:11px}
+.req li{display:flex;gap:11px;align-items:flex-start;font-size:14.5px;color:var(--txt2)}
+.req li svg{width:18px;height:18px;flex:none;margin-top:4px;stroke:var(--ok,#37d67a);fill:none;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
+.req .note{
+  padding:18px 20px;border-radius:14px;border:1px solid rgba(255,176,32,.3);
+  background:rgba(255,176,32,.07);font-size:13.5px;color:var(--txt2);line-height:1.9;
+}
+.req .note b{color:var(--a1)}
+
+/* ---------------------------- الخاتمة ---------------------------- */
+.final{
+  text-align:center;padding:70px 30px;border-radius:26px;position:relative;overflow:hidden;
+  border:1px solid rgba(255,176,32,.22);
+  background:radial-gradient(700px 340px at 50% 0%,rgba(255,176,32,.14),transparent 70%),linear-gradient(160deg,var(--panel2),var(--bg2));
+}
+.final h2{margin-bottom:14px}
+.final p{color:var(--txt2);max-width:560px;margin:0 auto 30px;font-size:15.5px}
+.final .cta-row{margin-bottom:0}
+.final .cta-row-wa{margin-top:14px}
+
+footer{border-top:1px solid var(--line);padding:34px 0 42px;margin-top:70px}
+footer .in{display:flex;align-items:center;gap:16px;flex-wrap:wrap;justify-content:space-between}
+footer .brand{font-size:16px}
+footer .brand img{width:32px;height:32px;border-radius:9px}
+footer p{font-size:13px;color:var(--dim)}
+footer .soc{display:flex;gap:10px}
+footer .soc a{
+  width:38px;height:38px;border-radius:11px;display:grid;place-items:center;
+  border:1px solid var(--line);background:rgba(255,255,255,.03);transition:.25s;
+}
+footer .soc a:hover{background:rgba(255,255,255,.09);transform:translateY(-2px)}
+footer .soc svg{width:18px;height:18px;fill:var(--txt2)}
+
+/* ---------------------------- ظهور عند التمرير ---------------------------- */
+.rv{opacity:0;transform:translateY(26px);transition:opacity .7s cubic-bezier(.16,1,.3,1),transform .7s cubic-bezier(.16,1,.3,1)}
+.rv.in{opacity:1;transform:none}
+
+/* ---------------------------- توست ---------------------------- */
+#toast{
+  position:fixed;bottom:26px;left:50%;transform:translate(-50%,140%);
+  padding:13px 22px;border-radius:13px;background:var(--panel3);border:1px solid var(--line2);
+  font-size:14px;font-weight:600;box-shadow:0 18px 44px rgba(0,0,0,.6);z-index:99;
+  transition:transform .4s cubic-bezier(.16,1,.3,1);max-width:90vw;text-align:center;
+}
+#toast.on{transform:translate(-50%,0)}
+
+@media(prefers-reduced-motion:reduce){
+  *{animation:none!important;transition:none!important}
+  .rv{opacity:1;transform:none}
+  .hero-shot{transform:none}
+}
+</style>
+</head>
+<body>
+
+<nav id="nav">
+  <div class="in">
+    <a class="brand" href="#top"><img src="img/logo.png" alt="فوده ستوديو" data-i18n-alt="brand"><span data-i18n="brand">فوده ستوديو</span></a>
+    <div class="links">
+      <a href="#features" data-i18n="navFeatures">المميزات</a>
+      <a href="#gallery" data-i18n="navGallery">من داخل البرنامج</a>
+      <a href="#how" data-i18n="navHow">طريقة التثبيت</a>
+      <a href="#req" data-i18n="navReq">المتطلبات</a>
+    </div>
+    <button type="button" class="lang-btn" id="langBtn" title="Switch to English" aria-label="Switch to English">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><path d="M12 3c2.6 3 2.6 15 0 18M12 3c-2.6 3-2.6 15 0 18"/></svg>
+      <span id="langTxt">EN</span>
+    </button>
+  </div>
+</nav>
+
+<header id="top">
+  <div class="wrap">
+    <div class="badge"><i></i><span id="badgeTxt">الإصدار 1.0.0 · ويندوز 10 / 11</span></div>
+    <h1><span data-i18n="h1a">استوديو كامل على جهازك</span><br><span class="grad" data-i18n="h1b">فيديو · صوت · صور · دبلجة</span></h1>
+    <p class="lead">
+      <span data-i18n="lead1">فوده ستوديو مش مجرد محرر فيديو.</span>
+      <b data-i18n="lead2">64 أداة احترافية</b>
+      <span data-i18n="lead3">تشتغل مع بعض في واجهة واحدة: مونتاج متعدد الطبقات، مؤثرات وانتقالات، دبلجة وترجمة آلية، استوديو موسيقى، استوديو صور، وخرائط تكتيكية — كل ده على جهازك.</span>
+    </p>
+    <div class="cta-row">
+      <a class="btn btn-main" id="fbHero" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        <span data-i18n="fbName">محمد جميل</span>
+      </a>
+      <a class="btn btn-ghost" id="waTop" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.5 14.4c-.3-.2-1.8-.9-2.1-1-.3-.1-.5-.1-.7.2s-.8 1-1 1.2c-.2.2-.4.2-.7.1-.3-.2-1.2-.5-2.4-1.5-.9-.8-1.4-1.7-1.6-2-.2-.3 0-.5.1-.6l.5-.6c.2-.2.2-.3.3-.5.1-.2 0-.4 0-.5 0-.2-.7-1.6-.9-2.2-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.6.1-.9.4-.3.3-1.1 1.1-1.1 2.7s1.2 3.1 1.3 3.3c.2.2 2.3 3.5 5.5 4.8 3.2 1.2 3.2.8 3.8.8.6 0 1.8-.7 2-1.4.3-.7.3-1.3.2-1.4-.1-.1-.3-.2-.6-.3z"/><path d="M12 2C6.5 2 2 6.5 2 12c0 1.8.5 3.4 1.3 4.9L2 22l5.3-1.3c1.4.8 3 1.3 4.7 1.3 5.5 0 10-4.5 10-10S17.5 2 12 2zm0 18.2c-1.6 0-3.1-.4-4.4-1.2l-.3-.2-3.1.8.8-3-.2-.3C4 15 3.8 13.5 3.8 12 3.8 7.5 7.5 3.8 12 3.8s8.2 3.7 8.2 8.2-3.7 8.2-8.2 8.2z"/></svg>
+        <span data-i18n="waAsk">اسأل على واتساب</span>
+      </a>
+    </div>
+    <p class="sub-note" data-i18n="subNote">التفعيل خلال دقائق · يعمل بدون إنترنت بعد التثبيت</p>
+
+    <div class="hero-shot rv">
+      <span class="glow"></span>
+      <img src="img/app-main.webp" alt="واجهة فوده ستوديو" data-i18n-alt="heroAlt" width="1280" height="735">
+    </div>
+
+    <div class="stats rv">
+      <div class="stat"><b class="grad">64</b><span data-i18n="st1">أداة احترافية</span></div>
+      <div class="stat"><b class="grad">4K</b><span data-i18n="st2">دقة تصدير حتى</span></div>
+      <div class="stat"><b class="grad">VST</b><span data-i18n="st3">دعم فلترات الصوت</span></div>
+      <div class="stat"><b class="grad">100%</b><span data-i18n="st4">على جهازك</span></div>
+    </div>
+  </div>
+</header>
+
+<section id="features">
+  <div class="wrap">
+    <div class="head rv">
+      <div class="kicker" data-i18n="ftKicker">إيه اللي جوه</div>
+      <h2><span data-i18n="ftH1">كل اللي محتاجه… </span><span class="grad" data-i18n="ftH2">في مكان واحد</span></h2>
+      <p data-i18n="ftP">بدل ما تدفع لخمس برامج مختلفة وتنقل الملفات بينهم، كل حاجة موجودة في استوديو واحد بيشتغل على جهازك.</p>
+    </div>
+    <div class="feats">
+      <div class="feat rv"><div class="ic"><svg viewBox="0 0 24 24"><rect x="2" y="5" width="14" height="14" rx="2.5"/><path d="m16 10 6-3v10l-6-3"/></svg></div>
+        <h3 data-i18n="f1t">مونتاج احترافي</h3><p data-i18n="f1p">تايم لاين متعدد الطبقات، كي فريمز ومنحنيات حركة، قص دقيق، وتصدير بجودة عالية — بنفس أسلوب برامج الاحتراف الكبيرة.</p></div>
+      <div class="feat rv"><div class="ic"><svg viewBox="0 0 24 24"><path d="M12 15a3 3 0 0 0 3-3V6a3 3 0 0 0-6 0v6a3 3 0 0 0 3 3z"/><path d="M19 11a7 7 0 0 1-14 0"/><path d="M12 18v3"/></svg></div>
+        <h3 data-i18n="f2t">دبلجة وترجمة آلية</h3><p data-i18n="f2p">يفرّغ الكلام من الفيديو، يترجمه، ويطلّع صوت بديل — لفيديو أجنبي أو محتوى بلغة تانية، من غير أي برنامج خارجي.</p></div>
+      <div class="feat rv"><div class="ic"><svg viewBox="0 0 24 24"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg></div>
+        <h3 data-i18n="f3t">استوديو موسيقى</h3><p data-i18n="f3p">بيانو تفاعلي، آلات، وإمكانية تحميل فلترات VST — تسجّل وتظبط الصوت جوه البرنامج نفسه.</p></div>
+      <div class="feat rv"><div class="ic"><svg viewBox="0 0 24 24"><path d="M3 12h3l2-6 3 12 2.5-9 2 5h5"/></svg></div>
+        <h3 data-i18n="f4t">فوده بيت ماركر</h3><p data-i18n="f4p">يحلّل الإيقاع ويحط علامة على كل بيت، وبيوزّع الصور على النغمات تلقائيًا — مونتاج على الموسيقى في دقائق.</p></div>
+      <div class="feat rv"><div class="ic"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8.5" cy="8.5" r="1.8"/><path d="m21 15-5-5L5 21"/></svg></div>
+        <h3 data-i18n="f5t">استوديو صور</h3><p data-i18n="f5p">إزالة خلفية، قص ذكي، تعديل ألوان، ورسم — كل أدوات الصور اللي بتحتاجها لتصاميمك وثيرات الفيديو.</p></div>
+      <div class="feat rv"><div class="ic"><svg viewBox="0 0 24 24"><path d="m12 3 2.2 5.6L20 11l-5.8 2.4L12 19l-2.2-5.6L4 11l5.8-2.4z"/><path d="M19 3v4M17 5h4"/></svg></div>
+        <h3 data-i18n="f6t">مؤثرات و3D وخرائط</h3><p data-i18n="f6p">مكتبة انتقالات ومؤثرات جاهزة، مشاهد 3D، وخرائط تكتيكية متحركة — كلها قابلة للتخصيص بالكامل.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="gallery">
+  <div class="wrap">
+    <div class="head rv">
+      <div class="kicker" data-i18n="galKicker">شوف بنفسك</div>
+      <h2><span data-i18n="galH1">من </span><span class="grad" data-i18n="galH2">جوه البرنامج</span></h2>
+      <p data-i18n="galP">لقطات حقيقية من النسخة نفسها اللي هتثبتها — مش صور تصميم.</p>
+    </div>
+    <div class="gal" id="gal">
+      <a class="shot wide rv" href="img/tool-library.webp" target="_blank" rel="noopener">
+        <img src="img/tool-library.webp" alt="مكتبة المؤثرات" data-i18n-alt="g1alt" loading="lazy">
+        <div class="zoom"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5M11 8v6M8 11h6"/></svg></div>
+        <div class="cap"><b data-i18n="g1b">مكتبة المؤثرات والانتقالات</b><span data-i18n="g1s">مئات المؤثرات الجاهزة — اسحب وأفلت على التايم لاين</span></div>
+      </a>
+      <a class="shot rv" href="img/tool-music.webp" target="_blank" rel="noopener">
+        <img src="img/tool-music.webp" alt="فوده ميوزك" data-i18n-alt="g2alt" loading="lazy">
+        <div class="zoom"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5M11 8v6M8 11h6"/></svg></div>
+        <div class="cap"><b data-i18n="g2b">فوده ميوزك</b><span data-i18n="g2s">بيانو تفاعلي، آلات، وفلترات VST — استوديو صوت كامل</span></div>
+      </a>
+      <a class="shot rv" href="img/tool-spark.webp" target="_blank" rel="noopener">
+        <img src="img/tool-spark.webp" alt="فوده سبارك" data-i18n-alt="g3alt" loading="lazy">
+        <div class="zoom"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5M11 8v6M8 11h6"/></svg></div>
+        <div class="cap"><b data-i18n="g3b">فوده سبارك</b><span data-i18n="g3s">لمسات إبداعية جاهزة: شاشات مقسومة، تحوّلات، وحركات</span></div>
+      </a>
+      <a class="shot rv" href="img/tool-3d.webp" target="_blank" rel="noopener">
+        <img src="img/tool-3d.webp" alt="فوده 3D" data-i18n-alt="g4alt" loading="lazy">
+        <div class="zoom"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5M11 8v6M8 11h6"/></svg></div>
+        <div class="cap"><b data-i18n="g4b">فوده 3D</b><span data-i18n="g4s">مشاهد ثلاثية الأبعاد جاهزة — شاشات كروما، إطارات، ومجسمات</span></div>
+      </a>
+      <a class="shot rv" href="img/tool-fouda.webp" target="_blank" rel="noopener">
+        <img src="img/tool-fouda.webp" alt="أداة فوده" data-i18n-alt="g5alt" loading="lazy">
+        <div class="zoom"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5M11 8v6M8 11h6"/></svg></div>
+        <div class="cap"><b data-i18n="g5b">أداة فوده</b><span data-i18n="g5s">تصميم العناوين والتايتلات بالكامل من جوه البرنامج</span></div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section id="how">
+  <div class="wrap">
+    <div class="head rv">
+      <div class="kicker" data-i18n="howKicker">التثبيت</div>
+      <h2><span data-i18n="howH1">تلات خطوات </span><span class="grad" data-i18n="howH2">وتبدأ الشغل</span></h2>
+      <p data-i18n="howP">مفيش حسابات، ومفيش خطوات معقّدة.</p>
+    </div>
+    <div class="steps">
+      <div class="step rv"><h3 data-i18n="s1t">نزّل البرنامج</h3><p data-i18n="s1p">نزّل الملف المضغوط، افك ضغطه (كليك يمين ← Extract All)، وبعدين شغّل Setup. التثبيت لمستخدم واحد — مش محتاج صلاحيات مدير.</p></div>
+      <div class="step rv"><h3 data-i18n="s2t">افتحه وابعت كود جهازك</h3><p data-i18n="s2p">أول تشغيل هيظهرلك كود الجهاز وزر واتساب. اضغط الزر وابعت الكود — عشان نفعّل نسختك.</p></div>
+      <div class="step rv"><h3 data-i18n="s3t">ابدأ الشغل فورًا</h3><p data-i18n="s3p">بمجرد التفعيل البرنامج بيفتح بكل الأدوات. بعد كده يقدر يشتغل بدون إنترنت.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="req">
+  <div class="wrap">
+    <div class="req rv">
+      <div>
+        <h2 data-i18n="reqH">المتطلبات</h2>
+        <ul>
+          <li><svg viewBox="0 0 24 24"><path d="m5 13 4 4L19 7"/></svg><span data-i18n="r1">ويندوز 10 أو 11 — نسخة 64-bit</span></li>
+          <li><svg viewBox="0 0 24 24"><path d="m5 13 4 4L19 7"/></svg><span data-i18n="r2">ذاكرة 4 جيجا أو أكثر (يُفضّل 8)</span></li>
+          <li><svg viewBox="0 0 24 24"><path d="m5 13 4 4L19 7"/></svg><span data-i18n="r3">مساحة فارغة 3 جيجا على القرص</span></li>
+          <li><svg viewBox="0 0 24 24"><path d="m5 13 4 4L19 7"/></svg><span data-i18n="r4">كارت شاشة يدعم WebGL (أي كارت حديث)</span></li>
+        </ul>
+      </div>
+      <div class="note">
+        <b data-i18n="noteB">ملاحظة عند التحميل:</b>
+        <span data-i18n="noteT">سيب التحميل يكمل من غير ما تقطعه. لو حصلت أي مشكلة في التحميل، كلّمنا على واتساب ونبعتلك الرابط على طول.</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="download">
+  <div class="wrap">
+    <div class="final rv">
+      <h2><span data-i18n="dlH1">جاهز </span><span class="grad" data-i18n="dlH2">تبدأ؟</span></h2>
+      <p data-i18n="dlP">نزّل فوده ستوديو دلوقتي، وجهّز أول فيديو النهاردة.</p>
+      <div class="cta-row">
+        <a class="btn btn-main" href="#download" data-dl="1">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"/><path d="m7 11 5 5 5-5"/><path d="M4 20h16"/></svg>
+          <span data-i18n="dl1">تحميل 1</span>
+        </a>
+        <a class="btn btn-main" href="#download" data-dl="2">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"/><path d="m7 11 5 5 5-5"/><path d="M4 20h16"/></svg>
+          <span data-i18n="dl2">تحميل 2</span>
+        </a>
+      </div>
+
+      <div class="cta-row cta-row-wa">
+        <a class="btn btn-ghost" id="waBottom" target="_blank" rel="noopener"><span data-i18n="waChat">تواصل على واتساب</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap in">
+    <a class="brand" href="#top"><img src="img/logo.png" alt="" data-i18n-alt="brand"><span data-i18n="brand">فوده ستوديو</span></a>
+    <p>© <span id="yr"></span> <span data-i18n="brand">فوده ستوديو</span> <span data-i18n="rights">· كل الحقوق محفوظة</span></p>
+    <div class="soc">
+      <a id="fbLink" target="_blank" rel="noopener" title="فيسبوك" aria-label="فيسبوك" data-i18n-title="fbTitle">
+        <svg viewBox="0 0 24 24"><path d="M22 12a10 10 0 1 0-11.6 9.9v-7H7.9V12h2.5V9.8c0-2.5 1.5-3.9 3.7-3.9 1.1 0 2.2.2 2.2.2v2.4h-1.2c-1.2 0-1.6.8-1.6 1.6V12h2.7l-.4 2.9h-2.3v7A10 10 0 0 0 22 12z"/></svg>
+      </a>
+      <a id="waFoot" target="_blank" rel="noopener" title="واتساب" aria-label="واتساب" data-i18n-title="waTitle">
+        <svg viewBox="0 0 24 24"><path d="M12 2C6.5 2 2 6.5 2 12c0 1.8.5 3.4 1.3 4.9L2 22l5.3-1.3c1.4.8 3 1.3 4.7 1.3 5.5 0 10-4.5 10-10S17.5 2 12 2zm5.5 12.4c-.3-.2-1.8-.9-2.1-1-.3-.1-.5-.1-.7.2s-.8 1-1 1.2c-.2.2-.4.2-.7.1-.3-.2-1.2-.5-2.4-1.5-.9-.8-1.4-1.7-1.6-2-.2-.3 0-.5.1-.6l.5-.6c.2-.2.2-.3.3-.5.1-.2 0-.4 0-.5 0-.2-.7-1.6-.9-2.2-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.6.1-.9.4-.3.3-1.1 1.1-1.1 2.7s1.2 3.1 1.3 3.3c.2.2 2.3 3.5 5.5 4.8 3.2 1.2 3.2.8 3.8.8.6 0 1.8-.7 2-1.4.3-.7.3-1.3.2-1.4-.1-.1-.3-.2-.6-.3z"/></svg>
+      </a>
+    </div>
+  </div>
+</footer>
+
+<div id="toast"></div>
+
+<script>
+/* ============================================================================
+   ✏️  الإعدادات — عدّل هنا وبس
+   ----------------------------------------------------------------------------
+   download  : رابط «تحميل 1» (جيت هوب — ملف مباشر).
+   download2 : رابط «تحميل 2» (مديا فاير — صفحة تحميل).
+               • Google Drive → الزق الرابط زي ما هو (اللي فيه /file/d/…) والصفحة
+                 بتحوّله لوحدها لتحميل مباشر، حتى لو الملف أكبر من 100 ميجا.
+               • MediaFire / أي رابط مباشر → الزقه زي ما هو.
+               • لو سايبه فاضي "" → الزرار يفتح واتساب بدل ما يبقى معطّل.
+   whatsapp : رقم واتساب بالصيغة الدولية بدون + وبدون مسافات.
+   ========================================================================== */
+const CFG = {
+  download  : 'https://github.com/fouda-studio/fouda-studio/releases/download/v1.0.0/Fouda.Studio.Setup.zip',
+  download2 : 'https://www.mediafire.com/file/np70iqam81wks9z/Fouda.Studio.Setup.zip/file',
+  whatsapp : '201224096153',
+  facebook : 'https://www.facebook.com/mohmmadfodh?locale=ar_AR',
+  version  : '1.0.0',
+  size     : '525 ميجا',
+};
+
+/* ============================================================================
+   اللغة — عربي / إنجليزي
+   ----------------------------------------------------------------------------
+   النص العربي مكتوب في الصفحة نفسها (مش متكرر هنا)، والقاموس ده فيه الإنجليزي بس.
+   عايز تعدّل نص عربي؟ عدّله في الـHTML زي ما هو.
+   عايز تعدّل الترجمة؟ عدّل القيمة المقابلة هنا.
+   ========================================================================== */
+const EN = {
+  pageTitle: 'Fouda Studio — Video, audio and photo studio in one program',
+  pageDesc : 'Fouda Studio: 64 professional tools for editing, effects, auto dubbing and translation, a music studio and a photo studio — all in one program on your machine.',
+
+  brand       : 'Fouda Studio',
+  navFeatures : 'Features',
+  navGallery  : 'Inside the app',
+  navHow      : 'How to install',
+  navReq      : 'Requirements',
+
+  h1a   : 'A complete studio on your machine',
+  h1b   : 'Video · Audio · Photos · Dubbing',
+  lead1 : 'Fouda Studio is more than a video editor.',
+  lead2 : '64 professional tools',
+  lead3 : 'working together in one interface: multi-layer editing, effects and transitions, auto dubbing and translation, a music studio, a photo studio and tactical maps — all on your machine.',
+  fbName  : 'Mohamed Gamil',
+  waAsk   : 'Ask on WhatsApp',
+  subNote : 'Activated in minutes · Works offline after installation',
+  heroAlt : 'Fouda Studio interface',
+  st1 : 'Professional tools',
+  st2 : 'Max export quality',
+  st3 : 'Audio plugin support',
+  st4 : 'On your machine',
+
+  ftKicker : "What's inside",
+  ftH1 : 'Everything you need… ',
+  ftH2 : 'in one place',
+  ftP  : 'Instead of paying for five different programs and moving files between them, everything lives in one studio that runs on your machine.',
+  f1t : 'Professional editing',
+  f1p : 'A multi-layer timeline, keyframes and motion curves, frame-accurate cutting and high-quality export — the same workflow as the big professional suites.',
+  f2t : 'Auto dubbing & translation',
+  f2p : 'Transcribes the speech, translates it and generates a new voice track — for foreign footage or content in another language, with no external software.',
+  f3t : 'Music studio',
+  f3p : 'An interactive piano, instruments and VST plugin support — record and mix inside the program itself.',
+  f4t : 'Fouda Beat Marker',
+  f4p : 'Detects the tempo, marks every beat and spreads your photos across the notes automatically — beat-synced edits in minutes.',
+  f5t : 'Photo studio',
+  f5p : 'Background removal, smart cut-out, colour grading and drawing — every image tool you need for designs and video thumbnails.',
+  f6t : 'Effects, 3D & maps',
+  f6p : 'A library of ready transitions and effects, 3D scenes and animated tactical maps — all fully customisable.',
+
+  galKicker : 'See for yourself',
+  galH1 : 'From ',
+  galH2 : 'inside the app',
+  galP  : "Real screenshots from the very build you'll install — not design mockups.",
+  g1alt : 'Effects library',
+  g1b : 'Effects & transitions library',
+  g1s : 'Hundreds of ready effects — drag and drop onto the timeline',
+  g2alt : 'Fouda Music',
+  g2b : 'Fouda Music',
+  g2s : 'Interactive piano, instruments and VST plugins — a full audio studio',
+  g3alt : 'Fouda Spark',
+  g3b : 'Fouda Spark',
+  g3s : 'Ready creative touches: split screens, transitions and motion',
+  g4alt : 'Fouda 3D',
+  g4b : 'Fouda 3D',
+  g4s : 'Ready 3D scenes — green screens, frames and models',
+  g5alt : 'Fouda Tool',
+  g5b : 'Fouda Tool',
+  g5s : 'Design titles and lower thirds entirely inside the program',
+
+  howKicker : 'Installation',
+  howH1 : 'Three steps ',
+  howH2 : "and you're working",
+  howP  : 'No accounts, no complicated steps.',
+  s1t : 'Download the program',
+  s1p : 'Download the ZIP, extract it (right-click → Extract All), then run Setup. It installs for a single user — no admin rights needed.',
+  s2t : 'Open it and send your device code',
+  s2p : "On first launch you'll see your device code and a WhatsApp button. Tap it and send the code so we can activate your copy.",
+  s3t : 'Start working right away',
+  s3p : 'Once activated, the program opens with every tool unlocked. After that it works fully offline.',
+
+  reqH : 'Requirements',
+  r1 : 'Windows 10 or 11 — 64-bit',
+  r2 : '4 GB RAM or more (8 GB recommended)',
+  r3 : '3 GB free disk space',
+  r4 : 'A WebGL-capable graphics card (any modern one)',
+  noteB : 'Download tip:',
+  noteT : "Let the download finish without interrupting it. If anything goes wrong, message us on WhatsApp and we'll send you the link directly.",
+
+  dlH1 : 'Ready ',
+  dlH2 : 'to start?',
+  dlP  : 'Download Fouda Studio now and finish your first video today.',
+  dl1  : 'Download 1',
+  dl2  : 'Download 2',
+  waChat : 'Chat on WhatsApp',
+
+  rights  : '· All rights reserved',
+  fbTitle : 'Facebook',
+  waTitle : 'WhatsApp',
+};
+
+const AR_TITLE = document.title;
+const AR_DESC  = document.querySelector('meta[name="description"]').content;
+let LANG = 'ar';
+
+function waLink() {
+  const msg = LANG === 'en'
+    ? "Hello, I'd like to download Fouda Studio"
+    : 'السلام عليكم، عايز أحمّل فوده ستوديو';
+  return 'https://wa.me/' + CFG.whatsapp + '?text=' + encodeURIComponent(msg);
+}
+
+/* نخزّن النص العربي الأصلي من الصفحة نفسها — مش محتاج نكتبه مرتين */
+document.querySelectorAll('[data-i18n]').forEach((el) => { el.dataset.ar = el.textContent; });
+document.querySelectorAll('[data-i18n-alt]').forEach((el) => { el.dataset.arAlt = el.alt || ''; });
+document.querySelectorAll('[data-i18n-title]').forEach((el) => { el.dataset.arTitle = el.title || ''; });
+
+const langBtn = document.getElementById('langBtn');
+const langTxt = document.getElementById('langTxt');
+const metaDesc = document.querySelector('meta[name="description"]');
+
+function applyLang(lang) {
+  LANG = (lang === 'en') ? 'en' : 'ar';
+  const en = LANG === 'en';
+
+  document.documentElement.lang = LANG;
+  document.documentElement.dir = en ? 'ltr' : 'rtl';
+
+  document.querySelectorAll('[data-i18n]').forEach((el) => {
+    const k = el.getAttribute('data-i18n');
+    el.textContent = (en && EN[k]) || el.dataset.ar;
+  });
+  document.querySelectorAll('[data-i18n-alt]').forEach((el) => {
+    const k = el.getAttribute('data-i18n-alt');
+    el.alt = (en && EN[k]) || el.dataset.arAlt;
+  });
+  document.querySelectorAll('[data-i18n-title]').forEach((el) => {
+    const k = el.getAttribute('data-i18n-title');
+    el.title = (en && EN[k]) || el.dataset.arTitle;
+    el.setAttribute('aria-label', el.title);
+  });
+
+  document.getElementById('badgeTxt').textContent = en
+    ? 'Version ' + CFG.version + ' · Windows 10 / 11'
+    : 'الإصدار ' + CFG.version + ' · ويندوز 10 / 11';
+
+  document.title = en ? EN.pageTitle : AR_TITLE;
+  if (metaDesc) metaDesc.setAttribute('content', en ? EN.pageDesc : AR_DESC);
+
+  langTxt.textContent = en ? 'ع' : 'EN';
+  langBtn.title = en ? 'التبديل إلى العربية' : 'Switch to English';
+  langBtn.setAttribute('aria-label', langBtn.title);
+
+  const w = waLink();
+  document.getElementById('waTop').href = w;
+  document.getElementById('waBottom').href = w;
+  document.getElementById('waFoot').href = w;
+
+  try { localStorage.setItem('fouda-lang', LANG); } catch (e) {}
+}
+
+langBtn.addEventListener('click', () => applyLang(LANG === 'en' ? 'ar' : 'en'));
+
+/* ------------------------------ ربط الأزرار ------------------------------ */
+document.getElementById('fbLink').href = CFG.facebook;
+document.getElementById('fbHero').href = CFG.facebook;
+document.getElementById('yr').textContent = new Date().getFullYear();
+
+/* ------------- تحويل رابط جوجل درايف لملف كبير لتحميل مباشر -------------
+   درايف بيدي صفحة "مش قادر نفحص الملف" لو الملف أكبر من 100 ميجا،
+   والرابط ده بيتخطاها وبينزّل الملف على طول. */
+function directLink(raw) {
+  const s = String(raw || '').trim();
+  if (!s) return '';
+  if (s.indexOf('drive.google.com') === -1) return s;   // مش درايف → سيبه زي ما هو
+  const id = (s.match(/\/file\/d\/([A-Za-z0-9_-]{10,})/) || s.match(/[?&]id=([A-Za-z0-9_-]{10,})/) || [])[1];
+  if (!id) return s;
+  return 'https://drive.usercontent.google.com/download?id=' + id + '&export=download&confirm=t';
+}
+
+const dlHref  = directLink(CFG.download);
+const dlHref2 = directLink(CFG.download2);
+
+/* التحميل 1 (جيت هوب): نفس التاب — بعض المتصفحات بتمنع تحميل بيفتح من تاب جديد
+   بعد تحويل لموقع تاني.
+   التحميل 2 (مديا فاير): صفحة عادية فيها زرار تحميل، فبتتفتح في تاب جديد
+   عشان العميل ما يخسرش الصفحة. */
+const LINKS = { '1': dlHref, '2': dlHref2 };
+
+document.querySelectorAll('[data-dl]').forEach((a) => {
+  const which = a.getAttribute('data-dl');
+  const href = LINKS[which] || dlHref || dlHref2;
+
+  if (!href) {
+    a.href = waLink();
+    a.target = '_blank';
+    a.rel = 'noopener';
+    a.addEventListener('click', () => toast(LANG === 'en'
+      ? 'The download link is being prepared — message us on WhatsApp and we will send it right away'
+      : 'رابط التحميل بيتجهّز — كلّمنا على واتساب ونجهزهولك فورًا'));
+    return;
+  }
+
+  a.href = href;
+
+  if (which === '2') {
+    a.target = '_blank';
+    a.rel = 'noopener';
+    return;
+  }
+
+  a.removeAttribute('target');
+  a.removeAttribute('rel');
+  if (href.charAt(0) !== 'h') a.setAttribute('download', '');   // ملف جانب الصفحة
+});
+
+/* اللغة المحفوظة — افتراضي عربي */
+let savedLang = 'ar';
+try { savedLang = localStorage.getItem('fouda-lang') || 'ar'; } catch (e) {}
+applyLang(savedLang);
+
+let toastT;
+function toast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('on');
+  clearTimeout(toastT);
+  toastT = setTimeout(() => t.classList.remove('on'), 5200);
+}
+
+/* --------------------------- ناف شفاف عند التمرير --------------------------- */
+const nav = document.getElementById('nav');
+const onScroll = () => nav.classList.toggle('on', window.scrollY > 24);
+onScroll();
+addEventListener('scroll', onScroll, { passive: true });
+
+/* ---------------------------- ظهور تدريجي للعناصر ---------------------------- */
+const io = new IntersectionObserver((es) => {
+  es.forEach((e) => {
+    if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+  });
+}, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+document.querySelectorAll('.rv').forEach((el, i) => {
+  el.style.transitionDelay = Math.min(i % 6, 5) * 60 + 'ms';
+  io.observe(el);
+});
+
+/* ------------------------- حركة لطيفة للصور بالماوس ------------------------- */
+/* ميل خفيف 3D + إضاءة بتتبع المؤشر — بدون مكتبات */
+document.querySelectorAll('.shot').forEach((card) => {
+  let raf = null;
+  const reset = () => {
+    card.style.transform = '';
+    card.style.removeProperty('--gx');
+    card.style.removeProperty('--gy');
+  };
+  card.addEventListener('mousemove', (ev) => {
+    if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    if (ev.pointerType === 'touch') return;
+    if (raf) return;
+    raf = requestAnimationFrame(() => {
+      raf = null;
+      const r = card.getBoundingClientRect();
+      const px = (ev.clientX - r.left) / r.width;
+      const py = (ev.clientY - r.top) / r.height;
+      const ry = (px - 0.5) * 7;
+      const rx = (0.5 - py) * 6;
+      card.style.transform = 'perspective(1100px) rotateX(' + rx.toFixed(2) + 'deg) rotateY(' + ry.toFixed(2) + 'deg) translateY(-4px) scale(1.012)';
+    });
+  });
+  card.addEventListener('mouseleave', reset);
+  card.addEventListener('blur', reset);
+});
+
+/* -------------------------- إضاءة تتبع الماوس في الكروت -------------------------- */
+document.querySelectorAll('.feat').forEach((c) => {
+  c.addEventListener('mousemove', (ev) => {
+    const r = c.getBoundingClientRect();
+    c.style.setProperty('--mx', ((ev.clientX - r.left) / r.width) * 100 + '%');
+    c.style.setProperty('--my', ((ev.clientY - r.top) / r.height) * 100 + '%');
+  });
+});
+</script>
+</body>
+</html>
